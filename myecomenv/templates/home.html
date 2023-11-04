@@ -1,0 +1,56 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %} Arun's {% endblock %}
+{% block content %}
+{% if category %}
+<div>
+  <div>
+    <p class="text-center"><a href="{% url 'allproducts' %}">Our Products Category</a></p>
+    </div>
+  </div>
+{% endif %}
+<div>
+  {% if category %}
+  <img src="{{category.image.url}}" alt = "{{category.name}}" style="width:300px; height:150px;">
+  </div>
+<br>
+<div>
+  <h1>{{category.name}}</h1>
+  <p>{{category.description}}</p>
+
+  </div>
+
+{% else %}
+<div>
+  <img src="{% static 'img/b.png' %}" alt="products" width="1550px" height="750px">
+</div>
+<br>
+<div>
+  <h1>Our products Description</h1>
+  <p>Welcome to our e-commerce website, your one-stop destination for all your online shopping needs. With a wide range of products and a user-friendly interface, we aim to provide you with a seamless and enjoyable shopping experience.
+    Discover a vast collection of high-quality products, ranging from fashion and accessories to electronics, home decor, beauty products, and much more
+    . Our curated selection ensures that you have access to the latest trends and top brands in the market.
+    Whether you're looking for a stylish outfit, the latest gadgets, or unique gift ideas, you'll find it all here.</p>
+</div>
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-9 col-sm-12 col-md-4 col-lg-4">
+            <div class="card text-center" style="width: 18rem;">
+            <a href="{{product.get_url}}"><img class="card-img-top" src="{{products.image.url}}" style="width:200px; height:200px;" alt="{{product.name}}"></a>
+            <div class="card-body">
+                <h5 class="card-title">{{product.name}}</h5>
+                <p class="card-text">{{product.price}}</p>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+
